@@ -5,8 +5,8 @@ export interface todo {
   title: string;
   description: string;
   completed: boolean;
-  userId: number;
-  user: User;
+  userId?: number;
+  user?: User;
   createdAt: Date;
   updatedAt: Date;
 }
