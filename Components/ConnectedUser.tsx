@@ -76,7 +76,7 @@ export default function ConnectedUser() {
               d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"
             />
           </svg>
-          Profile
+          <Link href={"/profile"}>Profile </Link>
         </button>
         <button className="block w-full text-left px-5 py-2 text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors font-medium flex items-center gap-2">
           <svg
