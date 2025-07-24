@@ -13,7 +13,7 @@ function ToDoListSection({ color, items }: { color: string; items: todo[] }) {
             key={index}
             className={`bg-white p-3 rounded border-l-4 border-${color}-500`}
           >
-            {item.description}
+            {item.title}
           </li>
         ))}
       </ul>

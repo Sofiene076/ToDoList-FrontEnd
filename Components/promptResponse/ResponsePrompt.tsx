@@ -10,7 +10,7 @@ function ResponsePrompt({ tasks }: { tasks: Task[] }) {
   if (tasks.length === 0) return null;
 
   return (
-    <div className="w-full mx-auto bg-gradient-to-br from-purple-50/80 via-blue-50/80 to-white/80 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-purple-100/70">
+    <div className="w-full mx-auto bg-gradient-to-br from-purple-50/80 via-blue-50/80 to-white/80 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-purple-100/70 mb-20">
       <h2 className=" text-3xl text-violet-600 text-cyan-700 mb-6 tracking-tight text-center font-mono font-extrabold">
         Generated To-Do List
       </h2>

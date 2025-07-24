@@ -3,8 +3,7 @@ import { User } from "./user";
 export interface todo {
   id: number;
   title: string;
-  description: string;
-  completed: boolean;
+  status: "todo" | "in-progress" | "done";
   userId?: number;
   user?: User;
   createdAt: Date;

@@ -1,46 +1,74 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ToDoListSection from "../../../Components/ToDoList/ToDoListSection";
 import { todo } from "@/models/todo";
 
-function page() {
-  const user = localStorage.getItem("user");
-  if (user === null) return <div>Please log in to view your To-Do List.</div>;
-  const items: todo[] = [
-    {
-      id: 1,
-      title: "Buy groceries",
-      description: "Milk, eggs, bread, and fruits",
-      completed: false,
-      createdAt: new Date("2025-07-15T10:00:00Z"),
-      updatedAt: new Date("2025-07-15T10:00:00Z"),
-    },
-    {
-      id: 2,
-      title: "Finish report",
-      description: "Complete the Q2 financial report",
-      completed: true,
-      createdAt: new Date("2025-07-14T14:30:00Z"),
-      updatedAt: new Date("2025-07-15T09:00:00Z"),
-    },
-    {
-      id: 3,
-      title: "Call mom",
-      description: "Check in and say hello",
-      completed: false,
-      userId: 101,
-      createdAt: new Date("2025-07-16T18:00:00Z"),
-      updatedAt: new Date("2025-07-16T18:00:00Z"),
-    },
-  ];
+function ToDoListpage() {
+  const [tasks, setTasks] = useState<todo[]>([]);
+  useEffect(() => {
+    const userStr = localStorage.getItem("user");
+    const user = userStr ? JSON.parse(userStr) : null;
+
+    if (!user) {
+      // Redirect to login if no user is found
+      window.location.href = "/auth/login";
+      return;
+    }
+
+    const userId = user.id;
+
+    const fetchTasks = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/todo/${userId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!res.ok) throw new Error("Failed to fetch tasks");
+
+        const data = await res.json();
+        setTasks(data); // store tasks in state
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
+
+    fetchTasks();
+  }, []);
+  // const items: todo[] = [
+  //   {
+  //     id: 1,
+  //     title: "Buy groceries",
+  //     status: "todo",
+  //     createdAt: new Date("2025-07-15T10:00:00Z"),
+  //     updatedAt: new Date("2025-07-15T10:00:00Z"),
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Finish report",
+  //     status: "in-progress",
+  //     createdAt: new Date("2025-07-14T14:30:00Z"),
+  //     updatedAt: new Date("2025-07-15T09:00:00Z"),
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Call mom",
+  //     status: "done",
+  //     userId: 101,
+  //     createdAt: new Date("2025-07-16T18:00:00Z"),
+  //     updatedAt: new Date("2025-07-16T18:00:00Z"),
+  //   },
+  // ];
   return (
     <div className="container bg-amber-100 flex flex-row gap-2 w-screen h-screen p-1.5 pt-20">
-      <div className="self-start blur-3xl bg-purple w-full"></div>
+      {/* <div className="self-start blur-3xl bg-purple w-full"></div> */}
       {/* Column 1 - Fresh gradient complement */}
       <div className="column flex-1 rounded-bl-3xl rounded-tr-3xl flex items-center justify-center mt-4 ml-1 mb-1 shadow-lg bg-gradient-to-br from-cyan-400 to-indigo-500">
-        <div className="text-center p-4 text-white">
+        <div className="text-center p-4 text-gray-800">
           <div id="todo-root" className="w-full max-w-400">
-            <ToDoListSection color="indigo" items={items} />
+            <ToDoListSection color="indigo" items={tasks} />
           </div>
         </div>
       </div>
@@ -68,4 +96,4 @@ function page() {
   );
 }
 
-export default page;
+export default ToDoListpage;

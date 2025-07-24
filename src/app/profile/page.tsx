@@ -13,7 +13,7 @@ function ProfilePage() {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     const fetchProfile = async () => {
       try {
