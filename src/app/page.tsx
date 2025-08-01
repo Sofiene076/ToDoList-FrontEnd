@@ -1,19 +1,17 @@
 import Link from "next/link";
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-tr from-purple-900 via-indigo-800 to-gray-800 p-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-200 via-teal-100 to-blue-100 p-6">
       <header className="w-full max-w-2xl flex flex-row items-center justify-between mb-12">
         <div>
           <h1 className="text-4xl font-bold text-purple-300 tracking-tight">
             PromptLy
           </h1>
-          <span className="text-sm text-purple-200">
-            AI Task Splitter
-          </span>
+          <span className="text-sm text-purple-200">AI Task Splitter</span>
         </div>
       </header>
 
-      <main className="flex flex-col items-center w-full max-w-lg bg-gray-800/90 rounded-2xl shadow-xl p-10 border border-purple-700/50">
+      <main className="flex flex-col items-center w-full max-w-lg bg-todolist rounded-2xl shadow-xl p-10 border border-purple-700/50">
         <h2 className="text-xl font-semibold text-white mb-4">
           Get started in 3 steps
         </h2>

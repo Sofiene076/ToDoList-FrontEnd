@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ResponsePrompt from "../../../Components/promptResponse/ResponsePrompt";
 import Link from "next/link";
 
@@ -60,6 +60,7 @@ export default function PromptPage() {
       setPrompt("");
       if (!res.ok) throw new Error("Failed to get tasks");
       const data = await res.json();
+
       setTasks(data.tasks || data);
       setResponse(data.response || "Tasks generated successfully");
       setShowActionButton(true);
@@ -72,7 +73,7 @@ export default function PromptPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start p-6 min-h-screen w-full mt-20">
+    <div className="flex flex-col items-center justify-start p-6 min-h-screen w-full mt-20  ">
       {/* Show Action Button here once tasks are generated */}
       {showActionButton && (
         <Link href="/todolist">
@@ -108,7 +109,7 @@ export default function PromptPage() {
         {/* Space for fixed prompt */}
         <ResponsePrompt tasks={tasks} />
         {response && !tasks.length && (
-          <div className="mt-2   bg-gradient-to-br from-purple-50/70 to-indigo-50/70 rounded-xl p-6 text-gray-900 shadow-inner border border-purple-100/70 backdrop-blur">
+          <div className="mt-2 bg-gradient-to-br from-purple-50/70 to-indigo-50/70 rounded-xl p-6 text-gray-900 shadow-inner border border-purple-100/70 backdrop-blur">
             <span className="block font-semibold text-purple-700 mb-2">
               AI Response:
             </span>

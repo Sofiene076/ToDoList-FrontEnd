@@ -13,11 +13,12 @@ function ProfilePage() {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("token"); // or sessionStorage
+        // console.log("Fetching profile with token:", token);
 
         if (!token) {
           setError("No authentication token found");
@@ -34,7 +35,7 @@ function ProfilePage() {
         });
         if (res.ok) {
           const data = await res.json();
-          console.log("Profile data:", data);
+          // console.log("Profile data:", data);
           setUser(data);
           setEmail(data.email);
           setName(data.name);
@@ -103,7 +104,7 @@ function ProfilePage() {
         </div>
 
         <div className="flex items-center justify-center gap-2 text-sm text-purple-800 mt-8 bg-purple-50/70 rounded-lg px-4 py-3 shadow-inner hover:shadow-md transition-shadow duration-300">
-          <Link href="/">
+          <Link href="/prompt">
             <span className="text-purple-600 hover:text-teal-500 hover:underline font-semibold cursor-pointer transition-colors">
               Back to Home
             </span>
