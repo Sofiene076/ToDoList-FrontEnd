@@ -40,9 +40,12 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-200 via-teal-100 to-blue-100">
-      <div className="bg-white/90 backdrop-blur-lg p-10 rounded-3xl shadow-2xl w-full max-w-md border border-purple-100">
-        <h2 className="text-4xl font-extrabold mb-8 text-center text-purple-800 tracking-tight drop-shadow">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-bl from-gray-800 via-gray-700 to-gray-600">
+      <div
+        className="bg-white/90 backdrop-blur-lg p-8 rounded-3xl shadow-2xl w-full max-w-md border border-purple-100"
+        style={{ minHeight: "auto" }}
+      >
+        <h2 className="text-4xl font-extrabold mb-6 text-center text-purple-800 tracking-tight drop-shadow">
           Create Account
         </h2>
 
@@ -52,11 +55,13 @@ export default function RegisterPage() {
           </p>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {" "}
+          {/* Reduced vertical spacing only */}
           <div>
             <label
               htmlFor="name"
-              className="block mb-2 text-base font-semibold text-purple-900"
+              className="block mb-2 text-shadow-md font-semibold text-purple-900 tracking-wide"
             >
               Name
             </label>
@@ -70,11 +75,10 @@ export default function RegisterPage() {
               required
             />
           </div>
-
           <div>
             <label
               htmlFor="email"
-              className="block mb-2 text-base font-semibold text-purple-900"
+              className="block mb-2 text-shadow-md font-semibold text-purple-900 tracking-wide "
             >
               Email
             </label>
@@ -88,11 +92,10 @@ export default function RegisterPage() {
               required
             />
           </div>
-
           <div>
             <label
               htmlFor="password"
-              className="block mb-2 text-base font-semibold text-purple-900"
+              className="block mb-2 text-shadow-md font-semibold text-purple-900 tracking-wide "
             >
               Password
             </label>
@@ -106,11 +109,10 @@ export default function RegisterPage() {
               required
             />
           </div>
-
           <div>
             <label
               htmlFor="confirmPassword"
-              className="block mb-2 text-base font-semibold text-purple-900"
+              className="block mb-2 text-shadow-md font-semibold text-purple-900 tracking-wide "
             >
               Confirm Password
             </label>
@@ -141,21 +143,20 @@ export default function RegisterPage() {
               )}
             </div>
             {password !== confirmPassword && confirmPassword && (
-              <p className="mt-2 text-sm text-red-400 font-medium">
+              <p className="mt-1 text-sm text-red-400 font-medium">
                 Passwords do not match
               </p>
             )}
           </div>
-
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-purple-500 to-teal-400 hover:from-purple-600 hover:to-teal-500 text-white font-bold cursor-pointer rounded-xl py-3 shadow-lg hover:shadow-xl transition-all text-lg"
+            className="w-full bg-gradient-to-r from-purple-500 to-teal-400 hover:from-purple-600 hover:to-teal-500 text-white font-bold cursor-pointer rounded-xl py-3 shadow-lg hover:shadow-xl transition-all text-lg mt-4"
           >
             Register
           </button>
         </form>
 
-        <div className="flex items-center justify-center gap-1 text-sm text-purple-800 mt-8 bg-purple-50/70 rounded-lg px-4 py-3 shadow-inner hover:shadow-md transition-shadow duration-300">
+        <div className="flex items-center justify-center gap-1 text-sm text-purple-800 mt-6 bg-purple-50/70 rounded-lg px-4 py-2 shadow-inner hover:shadow-md transition-shadow duration-300">
           <span>Already have an account?</span>
           <Link href="/auth/login">
             <span className="text-purple-600 hover:text-teal-500 hover:underline font-semibold cursor-pointer transition-colors">

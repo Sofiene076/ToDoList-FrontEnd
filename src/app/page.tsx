@@ -1,7 +1,7 @@
 import Link from "next/link";
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-200 via-teal-100 to-blue-100 p-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 p-6">
       <header className="w-full max-w-2xl flex flex-row items-center justify-between mb-12">
         <div>
           <h1 className="text-4xl font-bold text-purple-300 tracking-tight">

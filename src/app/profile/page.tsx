@@ -1,19 +1,20 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { use, useEffect, useState } from "react";
 
 function ProfilePage() {
   const [user, setUser] = useState<{
     name: string;
     email: string;
-    password: string;
-    confirmPassword: string;
+    provider?: string;
   } | null>(null);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
+  const [provider, setProvider] = useState("");
   const [loading, setLoading] = useState(true);
-
+  const router = useRouter();
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -23,6 +24,7 @@ function ProfilePage() {
         if (!token) {
           setError("No authentication token found");
           setLoading(false);
+          router.push("/auth/login");
           return;
         }
         const res = await fetch("http://localhost:3000/auth/profile", {
@@ -35,10 +37,13 @@ function ProfilePage() {
         });
         if (res.ok) {
           const data = await res.json();
-          // console.log("Profile data:", data);
+          console.log("Profile data:", data);
+
           setUser(data);
           setEmail(data.email);
           setName(data.name);
+          setProvider(data.provider);
+          console.log("User provider:", provider);
         } else {
           setUser(null);
           setError("Failed to fetch profile");
@@ -52,12 +57,17 @@ function ProfilePage() {
     };
     fetchProfile();
   }, []);
+
+  const handleEditClick = () => {
+    router.push("/profile/edit");
+  };
+
   if (loading) {
     return <div className="text-center text-gray-500">Loading...</div>;
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-200 via-teal-100 to-blue-100">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-bl from-gray-800 via-gray-700 to-gray-600">
       <div className="bg-white/90 backdrop-blur-lg p-10 rounded-3xl shadow-2xl w-full max-w-md border border-purple-100">
         <h2 className=" self-start text-4xl font-extrabold mb-8 text-center text-purple-800 tracking-tight drop-shadow">
           Profile
@@ -102,19 +112,29 @@ function ProfilePage() {
             />
           </div>
         </div>
+        <div className="mt-8 flex flex-col gap-4">
+          {!provider && (
+            <button
+              onClick={handleEditClick}
+              className="px-6 py-3 rounded-xl cursor-pointer  transition bg-gradient-to-r from-purple-600 to-blue-500 text-white font-bold shadow-lg focus:ring-4 focus:ring-purple-200 hover:from-purple-700 hover:to-blue-600 opacity-90 "
+            >
+              Edit Profile
+            </button>
+          )}
 
-        <div className="flex items-center justify-center gap-2 text-sm text-purple-800 mt-8 bg-purple-50/70 rounded-lg px-4 py-3 shadow-inner hover:shadow-md transition-shadow duration-300">
-          <Link href="/prompt">
-            <span className="text-purple-600 hover:text-teal-500 hover:underline font-semibold cursor-pointer transition-colors">
-              Back to Home
-            </span>
-          </Link>
-          <span>|</span>
-          <Link href="/auth/logout">
-            <span className="text-red-500 hover:text-red-700 hover:underline font-semibold cursor-pointer transition-colors">
-              Logout
-            </span>
-          </Link>
+          <div className="flex items-center justify-center gap-2 text-sm text-purple-800 mt-2 bg-purple-50/70 rounded-lg px-4 py-3 shadow-inner hover:shadow-md transition-shadow duration-300">
+            <Link href="/prompt">
+              <span className="text-purple-600 hover:text-teal-500 hover:underline font-semibold cursor-pointer transition-colors">
+                Back to Home
+              </span>
+            </Link>
+            <span>|</span>
+            <Link href="/auth/logout">
+              <span className="text-red-500 hover:text-red-700 hover:underline font-semibold cursor-pointer transition-colors">
+                Logout
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

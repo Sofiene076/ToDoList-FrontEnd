@@ -15,19 +15,25 @@ export default function PromptPage() {
   const [error, setError] = useState("");
   const [tasks, setTasks] = useState<Task[]>([]);
   const [showActionButton, setShowActionButton] = useState(false);
-  // const [count, setCount] = useState(0);
-  // const [isConnected, setIsConnected] = useState(false);
+
   const handleExportClick = async () => {
+    const token = localStorage.getItem("token");
     const userStr = localStorage.getItem("user");
     if (!userStr) {
       alert("You must be logged in to export tasks.");
       return;
     }
     const user = userStr ? JSON.parse(userStr) : null;
+    console.log("Exporting tasks for user:", user);
+    console.log("Tasks to export:", tasks);
     try {
       const res = await fetch("http://localhost:3000/todo/createfromexport", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+
         body: JSON.stringify({
           tasks,
           userId: user.id,

@@ -50,10 +50,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-100 via-blue-100 to-white">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-bl from-gray-800 via-gray-700 to-gray-600">
       <div className="bg-white/90 backdrop-blur-md p-10 rounded-2xl shadow-2xl w-full max-w-md border border-gray-200">
         <h2 className="text-3xl font-extrabold mb-8 text-center text-purple-700 tracking-tight drop-shadow">
-          Welcome Back
+          Login to connect
         </h2>
 
         {error && (
