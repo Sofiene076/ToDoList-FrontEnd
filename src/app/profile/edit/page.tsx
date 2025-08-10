@@ -167,7 +167,7 @@ export default function EditProfilePage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-bl from-gray-800 via-gray-700 to-gray-600">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-indigo-900 to-gray-900">
       <div className="bg-white/90 backdrop-blur-lg p-10 rounded-3xl shadow-2xl w-full max-w-md border border-purple-100">
         <h2 className="text-4xl font-extrabold mb-8 text-center text-purple-800 tracking-tight drop-shadow">
           Edit Profile

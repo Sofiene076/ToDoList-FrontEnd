@@ -229,7 +229,7 @@ function ToDoListpage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-bl from-gray-800 via-gray-700 to-gray-600 flex items-center justify-center">
         <div className="text-white">Loading tasks...</div>
       </div>
     );
@@ -237,21 +237,22 @@ function ToDoListpage() {
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="min-h-screen bg-gradient-to-br from-gray-9  00 to-gray-800 pt-24 pb-10 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-purple-950 via-indigo-950 to-gray-900 pt-28 pb-10 px-4">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-purple-300 my-8 text-center">
+          <h1 className="text-4xl font-extrabold font-mono text-purple-300 drop-shadow-md my-6 text-center">
             To-Do List
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
             {/* To Do Column */}
             <Droppable droppableId="todo">
               {(provided) => (
                 <div
-                  className="bg-gray-800 rounded-lg shadow-lg border border-purple-700/30 p-6 h-max"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
+                  className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg border border-purple-500/30 p-6 h-max transition-all duration-300 hover:border-purple-400/50"
                 >
-                  <h2 className="text-xl font-semibold text-purple-300 mb-4 pb-2 border-b border-purple-700/50">
+                  <h2 className="text-xl font-semibold text-purple-300 mb-4 pb-2 border-b border-purple-500/50">
                     To Do
                   </h2>
                   <ul className="space-y-5">
@@ -265,7 +266,7 @@ function ToDoListpage() {
                       />
                     ))}
                     {toDoTasks.length === 0 && (
-                      <p className="text-gray-500 italic">No tasks to do</p>
+                      <p className="text-gray-400 italic">No tasks to do</p>
                     )}
                     {provided.placeholder}
                   </ul>
@@ -277,9 +278,9 @@ function ToDoListpage() {
             <Droppable droppableId="in-progress">
               {(provided) => (
                 <div
-                  className="bg-gray-800 rounded-lg shadow-lg border border-blue-500/30 p-6 h-max"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
+                  className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg border border-blue-500/30 p-6 h-max transition-all duration-300 hover:border-blue-400/50"
                 >
                   <h2 className="text-xl font-semibold text-blue-300 mb-4 pb-2 border-b border-blue-500/50">
                     In Progress
@@ -295,7 +296,7 @@ function ToDoListpage() {
                       />
                     ))}
                     {inProgressTasks.length === 0 && (
-                      <p className="text-gray-500 italic">
+                      <p className="text-gray-400 italic">
                         No tasks in progress
                       </p>
                     )}
@@ -309,9 +310,9 @@ function ToDoListpage() {
             <Droppable droppableId="done">
               {(provided) => (
                 <div
-                  className="bg-gray-800 rounded-lg shadow-lg border border-green-500/30 p-6 h-max"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
+                  className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg border border-green-500/30 p-6 h-max transition-all duration-300 hover:border-green-400/50"
                 >
                   <h2 className="text-xl font-semibold text-green-300 mb-4 pb-2 border-b border-green-500/50">
                     Completed
@@ -327,7 +328,7 @@ function ToDoListpage() {
                       />
                     ))}
                     {doneTasks.length === 0 && (
-                      <p className="text-gray-500 italic">No completed tasks</p>
+                      <p className="text-gray-400 italic">No completed tasks</p>
                     )}
                     {provided.placeholder}
                   </ul>
@@ -336,6 +337,17 @@ function ToDoListpage() {
             </Droppable>
           </div>
         </div>
+
+        {/* Animations */}
+        <style jsx global>{`
+          .task-item {
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+          }
+          .task-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 14px rgba(0, 0, 0, 0.25);
+          }
+        `}</style>
       </div>
     </DragDropContext>
   );
